@@ -42,6 +42,7 @@ func get(writer http.ResponseWriter, request *http.Request) {
 		}
 		commons.SendResponse(writer, http.StatusOK, json)
 	} else {
+
 		commons.SendError(writer, http.StatusNotFound)
 	}
 }
