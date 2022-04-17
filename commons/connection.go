@@ -2,6 +2,7 @@ package commons
 
 import (
 	"database/sql"
+	"github.com/jeremiascardoso00/demo-crud-api-rest-go/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
@@ -17,4 +18,13 @@ func GetConnection() (*gorm.DB, *sql.DB) {
 		log.Fatal("error getting db connection", err)
 	}
 	return db, psgDB
+}
+
+func Migrate() {
+	db, psgDB := GetConnection()
+	defer func() {
+		psgDB.Close()
+	}()
+	log.Println("Migrate")
+	db.AutoMigrate(&models.Person{})
 }
